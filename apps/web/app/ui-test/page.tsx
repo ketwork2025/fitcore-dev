@@ -81,7 +81,6 @@ export default function UITestPage() {
           <div className="flex items-center gap-4">
             <Button 
                variant="outline" 
-               size="sm" 
                className="text-[10px] uppercase font-black tracking-widest border-fitcore-green/20 text-fitcore-green hover:bg-fitcore-green/10"
                onClick={() => setUser(user ? { ...user, role: user.role === 'admin' ? 'user' : 'admin' } : null)}
             >
