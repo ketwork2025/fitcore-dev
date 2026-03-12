@@ -52,23 +52,27 @@ export function WorkoutTracker({ workoutId, exerciseName, onFinish }: { workoutI
 
   const toggleSetCompletion = async (index: number) => {
     const newSets = [...sets];
-    newSets[index].completed = !newSets[index].completed;
-    setSets(newSets);
+    if (newSets[index]) {
+      newSets[index].completed = !newSets[index].completed;
+      setSets(newSets);
 
-    if (newSets[index].completed) {
-      setIsResting(true);
-      setRestTime(60);
-      // Automatically focus next set if available
-      if (index + 1 < sets.length) {
-        setActiveSetIndex(index + 1);
+      if (newSets[index].completed) {
+        setIsResting(true);
+        setRestTime(60);
+        // Automatically focus next set if available
+        if (index + 1 < sets.length) {
+          setActiveSetIndex(index + 1);
+        }
       }
     }
   };
 
   const updateSet = (index: number, field: keyof SetRecord, value: string) => {
     const newSets = [...sets];
-    (newSets[index] as any)[field] = value;
-    setSets(newSets);
+    if (newSets[index]) {
+      (newSets[index] as any)[field] = value;
+      setSets(newSets);
+    }
   };
 
   const finishWorkout = async () => {
@@ -78,11 +82,14 @@ export function WorkoutTracker({ workoutId, exerciseName, onFinish }: { workoutI
       const completedSets = sets.filter(s => s.completed && s.weight && s.reps);
       
       for (let i = 0; i < completedSets.length; i++) {
+        const set = completedSets[i];
+        if (!set) continue;
+        
         await supabase.from('workout_sets').insert({
           workout_log_id: workoutId,
           set_number: i + 1,
-          weight_kg: parseFloat(completedSets[i].weight),
-          reps: parseInt(completedSets[i].reps),
+          weight_kg: parseFloat(set.weight),
+          reps: parseInt(set.reps),
           is_completed: true
         });
       }
