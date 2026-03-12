@@ -55,5 +55,13 @@
     "start_btn": "Start Recommended Routine",
     "analysis": "Based on your InBody, you could use more upper body focus today!",
     "tip": "Tip: Stay hydrated and don't forget to stretch before your workout."
+  },
+  "tabs": {
+    "upgrade_pro": "Upgrade Pro",
+    "overview": "Overview",
+    "ranking": "Ranking",
+    "mypage": "My Page",
+    "admin": "Admin",
+    "mode_active": "{{mode}} mode active"
   }
 }

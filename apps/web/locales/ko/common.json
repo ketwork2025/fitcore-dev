@@ -55,5 +55,13 @@
     "start_btn": "추천 운동 루틴 시작",
     "analysis": "체성분 분석 결과, 상체 근육 보강이 필요해 보이네요!",
     "tip": "팁: 물을 충분히 마시고 운동 전 스트레칭을 잊지 마세요."
+  },
+  "tabs": {
+    "upgrade_pro": "PRO 업그레이드",
+    "overview": "대시보드",
+    "ranking": "랭킹",
+    "mypage": "마이페이지",
+    "admin": "관리자",
+    "mode_active": "{{mode}} 모드 활성"
   }
 }

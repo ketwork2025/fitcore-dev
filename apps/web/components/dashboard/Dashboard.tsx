@@ -118,12 +118,12 @@ export function Dashboard() {
                      className="bg-gradient-to-r from-fitcore-green to-emerald-500 px-3 py-1 rounded-full text-black text-[9px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(57,255,20,0.3)] hover:scale-105 transition-all group flex items-center gap-1"
                    >
                       <Zap className="w-2.5 h-2.5 fill-current group-hover:animate-pulse" />
-                      Upgrade Pro
+                      {t('tabs.upgrade_pro')}
                    </button>
                 )}
              </div>
              <SubscriptionModal isOpen={showSubscription} onClose={() => setShowSubscription(false)} />
-             <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{activeTab} mode active</p>
+             <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{t('tabs.mode_active', { mode: t(`tabs.${activeTab}`) })}</p>
           </div>
 
           <div className="flex items-center gap-2 bg-black/20 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
@@ -143,7 +143,7 @@ export function Dashboard() {
                    }`}
                 >
                    {tab.icon}
-                   <span className="hidden md:inline uppercase">{tab.id}</span>
+                   <span className="hidden md:inline uppercase">{t(`tabs.${tab.id}`)}</span>
                 </button>
              ))}
              <div className="w-px h-8 bg-white/10 mx-1" />
