@@ -48,6 +48,10 @@ export function AuthForm() {
     }
   };
 
+  const handleDemoLogin = () => {
+    setUser({ id: 'demo-user-id', email: 'demo@fitcore.ai' });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -89,9 +93,18 @@ export function AuthForm() {
             
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-3">
               <Button type="submit" fullWidth disabled={loading}>
                 {loading ? <Loader2 className="animate-spin w-5 h-5" /> : (mode === 'signin' ? '로그인' : '회원가입')}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                fullWidth 
+                onClick={handleDemoLogin}
+                className="border-fitcore-green/30 text-fitcore-green hover:bg-fitcore-green/10 italic font-black"
+              >
+                데모 계정으로 바로 체험하기
               </Button>
             </div>
           </form>
