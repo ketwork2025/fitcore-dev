@@ -163,8 +163,8 @@ export function Dashboard() {
 
             {/* 1. InBody Section */}
             <section>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-1">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="lg:col-span-1 mb-8 lg:mb-0">
                   <div className="flex justify-between items-end mb-4">
                     <h3 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2 italic">
                       <Activity className="w-5 h-5 text-fitcore-green" />

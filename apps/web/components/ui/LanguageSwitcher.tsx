@@ -13,6 +13,14 @@ export function LanguageSwitcher() {
   }, []);
 
   const changeLanguage = (lng: string) => {
+    if (lng === 'google') {
+      const element = document.getElementById('google_translate_element');
+      if (element) {
+        element.style.visibility = 'visible';
+        alert('구글 자동번역 창이 활성화되었습니다. (화면 하단 확인)');
+      }
+      return;
+    }
     i18n.changeLanguage(lng);
   };
 
@@ -31,6 +39,7 @@ export function LanguageSwitcher() {
         <option value="ko">한국어</option>
         <option value="en">English</option>
         <option value="ja">日本語</option>
+        <option value="google">언어선택</option>
       </select>
     </div>
   );
