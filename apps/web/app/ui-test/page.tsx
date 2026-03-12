@@ -120,38 +120,6 @@ export default function UITestPage() {
           )}
         </section>
 
-        {/* 2. Primitives Test */}
-        <section className="space-y-8 pt-12 border-t border-gray-800">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-6 w-1 bg-fitcore-green rounded-full"></div>
-            <h2 className="text-xl font-bold uppercase tracking-widest text-gray-400">02. Design Primitives (Phase S3)</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Button Variants */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Button Variants</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Button variant="primary" fullWidth>Primary Action</Button>
-                <Button variant="secondary" fullWidth>Secondary Action</Button>
-                <Button variant="outline" fullWidth>Outline Action</Button>
-              </CardContent>
-            </Card>
-
-            {/* Input States */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Input States</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input label="Default State" placeholder="Type something..." />
-                <Input label="Error State" placeholder="Wrong value" error="Invalid input provided" />
-              </CardContent>
-            </Card>
-          </div>
-        </section>
       </div>
     </main>
   );
