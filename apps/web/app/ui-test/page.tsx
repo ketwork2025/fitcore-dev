@@ -76,7 +76,6 @@ export default function UITestPage() {
         <header className="border-b border-gray-800 pb-6 flex justify-between items-center">
           <div>
             <h1 className="text-4xl font-black text-fitcore-green italic tracking-tighter">FITCORE UI LAB</h1>
-            <p className="text-gray-400 mt-2 font-medium">Design System & Full Journey Simulation</p>
           </div>
           <div className="flex items-center gap-4">
             <Button 
@@ -99,15 +98,7 @@ export default function UITestPage() {
 
         {/* 1. Dashboard & Auth Integration Test */}
         <section className="space-y-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <div className="h-6 w-1 bg-fitcore-green rounded-full"></div>
-              <h2 className="text-xl font-black uppercase tracking-tighter italic text-white">01. Service Integration Experience</h2>
-            </div>
-            <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10">
-               <span className="text-[10px] text-gray-400 font-bold">STABLE VERSION S4.2</span>
-            </div>
-          </div>
+          <div className="py-4"></div>
           
           {user ? (
             <div className="animate-in fade-in duration-700">
