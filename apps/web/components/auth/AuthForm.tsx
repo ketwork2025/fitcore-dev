@@ -42,7 +42,13 @@ export function AuthForm() {
         alert('회원가입 확인 메일이 발송되었습니다. 메일함을 확인해주세요!');
       }
     } catch (err: any) {
-      setError(err.message || '인증에 실패했습니다.');
+      const msg = err.message || '';
+      if (msg.includes('already registered')) {
+        setError('이미 가입된 계정입니다. 로그인 모드로 전환합니다.');
+        setMode('signin');
+      } else {
+        setError(msg || '인증에 실패했습니다.');
+      }
     } finally {
       setLoading(false);
     }
