@@ -1,0 +1,59 @@
+{
+  "common": {
+    "title": "FITCORE",
+    "dashboard": "대시보드",
+    "workout": "운동 기록",
+    "nutrition": "식단 기록",
+    "inbody": "인바디",
+    "settings": "설정",
+    "logout": "로그아웃",
+    "welcome": "안녕하세요, {{name}}님",
+    "save": "저장하기",
+    "saving": "저장 중...",
+    "success": "성공!",
+    "error": "오류가 발생했습니다."
+  },
+  "inbody": {
+    "title": "인바디 데이터 기록",
+    "weight": "체중",
+    "muscle": "골격근량",
+    "fat": "체지방률",
+    "record_btn": "오늘의 변화 기록하기",
+    "latest_measured": "최근 측정: {{date}}"
+  },
+  "workout": {
+    "title": "새로운 운동 시작",
+    "exercise_placeholder": "예: 벤치프레스, 스쿼트",
+    "start_btn": "운동 시작하기",
+    "finish_btn": "운동 완료 (종료)",
+    "add_set_btn": "세트 추가",
+    "set": "세트",
+    "weight": "무게",
+    "reps": "횟수",
+    "completed": "완료"
+  },
+  "nutrition": {
+    "title": "AI 식단 & 영양 기록",
+    "meal_types": {
+      "breakfast": "아침",
+      "lunch": "점심",
+      "dinner": "저녁",
+      "snack": "간식"
+    },
+    "food_name": "음식명",
+    "food_placeholder": "예: 닭가슴살 샐러드",
+    "calories": "칼로리",
+    "protein": "단백질",
+    "carbs": "탄수화물",
+    "fat": "지방",
+    "save_btn": "오늘의 식단 저장하기",
+    "ai_scan": "AI 스캔 (준비중)"
+  },
+  "coach": {
+    "title": "AI 퍼스널 트레이너",
+    "recommendation": "오늘의 맞춤 루틴",
+    "start_btn": "추천 운동 루틴 시작",
+    "analysis": "체성분 분석 결과, 상체 근육 보강이 필요해 보이네요!",
+    "tip": "팁: 물을 충분히 마시고 운동 전 스트레칭을 잊지 마세요."
+  }
+}

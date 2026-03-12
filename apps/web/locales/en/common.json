@@ -1,0 +1,59 @@
+{
+  "common": {
+    "title": "FITCORE",
+    "dashboard": "Dashboard",
+    "workout": "Workout Log",
+    "nutrition": "Nutrition Log",
+    "inbody": "InBody",
+    "settings": "Settings",
+    "logout": "Logout",
+    "welcome": "Hello, {{name}}",
+    "save": "Save",
+    "saving": "Saving...",
+    "success": "Success!",
+    "error": "An error occurred."
+  },
+  "inbody": {
+    "title": "InBody Record",
+    "weight": "Weight",
+    "muscle": "Muscle Mass",
+    "fat": "Body Fat %",
+    "record_btn": "Record Today's Progress",
+    "latest_measured": "Last measured: {{date}}"
+  },
+  "workout": {
+    "title": "Start New Workout",
+    "exercise_placeholder": "ex: Bench Press, Squat",
+    "start_btn": "Start Workout",
+    "finish_btn": "Finish Workout",
+    "add_set_btn": "Add Set",
+    "set": "Set",
+    "weight": "Weight",
+    "reps": "Reps",
+    "completed": "Completed"
+  },
+  "nutrition": {
+    "title": "AI Nutrition Log",
+    "meal_types": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "snack": "Snack"
+    },
+    "food_name": "Food Name",
+    "food_placeholder": "ex: Chicken breast salad",
+    "calories": "Calories",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fat": "Fat",
+    "save_btn": "Save Today's Meal",
+    "ai_scan": "AI Scan (Coming soon)"
+  },
+  "coach": {
+    "title": "AI Personal Trainer",
+    "recommendation": "Today's Custom Routine",
+    "start_btn": "Start Recommended Routine",
+    "analysis": "Based on your InBody, you could use more upper body focus today!",
+    "tip": "Tip: Stay hydrated and don't forget to stretch before your workout."
+  }
+}

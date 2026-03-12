@@ -1,0 +1,145 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-02T01:34:54.306Z",
+  "activeFeatures": [
+    "web",
+    "mobile"
+  ],
+  "primaryFeature": "web",
+  "features": {
+    "web": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-02T00:33:58.719Z",
+        "lastUpdated": "2026-03-02T01:34:54.306Z"
+      },
+      "lastFile": "C:/Users/LG/.gemini/antigravity/scratch/my-saas-project/apps/web/lib/ai/coaching-report.ts"
+    },
+    "mobile": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-02T01:29:50.265Z",
+        "lastUpdated": "2026-03-02T01:29:50.265Z"
+      },
+      "lastFile": "C:/Users/LG/.gemini/antigravity/scratch/my-saas-project/apps/mobile/lib/ai.ts"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-02T00:24:51.726Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-02T01:34:54.306Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-02T00:33:58.719Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T00:37:05.765Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T00:37:17.962Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T00:44:22.175Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T00:44:37.749Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:28:08.581Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:28:24.570Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:28:49.653Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:29:19.910Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:29:50.265Z",
+      "feature": "mobile",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:32:24.849Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:33:26.853Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:33:42.990Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:34:02.566Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:34:34.174Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-02T01:34:54.306Z",
+      "feature": "web",
+      "phase": "do",
+      "action": "updated"
+    }
+  ]
+}

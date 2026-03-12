@@ -1,0 +1,59 @@
+{
+  "common": {
+    "title": "FITCORE",
+    "dashboard": "ダッシュボード",
+    "workout": "トレーニング記録",
+    "nutrition": "食事記録",
+    "inbody": "インボディ",
+    "settings": "設定",
+    "logout": "ログアウト",
+    "welcome": "こんにちは、{{name}}さん",
+    "save": "保存する",
+    "saving": "保存中...",
+    "success": "成功！",
+    "error": "エラーが発生しました。"
+  },
+  "inbody": {
+    "title": "インボディ記録",
+    "weight": "体重",
+    "muscle": "骨格筋量",
+    "fat": "体脂肪率",
+    "record_btn": "今日の変化を記録する",
+    "latest_measured": "前回の測定: {{date}}"
+  },
+  "workout": {
+    "title": "新しいトレーニング開始",
+    "exercise_placeholder": "例：ベンチプレス、スクワット",
+    "start_btn": "トレーニング開始",
+    "finish_btn": "トレーニング終了",
+    "add_set_btn": "セット追加",
+    "set": "セット",
+    "weight": "重量",
+    "reps": "回数",
+    "completed": "完了"
+  },
+  "nutrition": {
+    "title": "AI 食事＆栄養記録",
+    "meal_types": {
+      "breakfast": "朝食",
+      "lunch": "昼食",
+      "dinner": "夕食",
+      "snack": "間食"
+    },
+    "food_name": "料理名",
+    "food_placeholder": "例：鶏胸肉のサラダ",
+    "calories": "カロリー",
+    "protein": "タンパク質",
+    "carbs": "炭水化物",
+    "fat": "脂質",
+    "save_btn": "今日の食事を保存する",
+    "ai_scan": "AIスキャン（準備中）"
+  },
+  "coach": {
+    "title": "AI パーソナルトレーナー",
+    "recommendation": "今日のカスタムルーチン",
+    "start_btn": "おすすめルーチンを開始",
+    "analysis": "インボディの分析結果、今日は上半身の強化が必要です！",
+    "tip": "ヒント：水分を十分に摂り、運動前のストレッチを忘れずに。"
+  }
+}

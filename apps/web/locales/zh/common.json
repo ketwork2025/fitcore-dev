@@ -1,0 +1,52 @@
+{
+  "common": {
+    "title": "FITCORE",
+    "dashboard": "仪表板",
+    "workout": "训练记录",
+    "nutrition": "饮食记录",
+    "inbody": "体测数据",
+    "settings": "设置",
+    "logout": "注销",
+    "welcome": "您好，{{name}}",
+    "save": "保存",
+    "saving": "保存中...",
+    "success": "成功！",
+    "error": "发生错误。"
+  },
+  "inbody": {
+    "title": "记录体测数据",
+    "weight": "体重",
+    "muscle": "骨骼肌量",
+    "fat": "体脂率",
+    "record_btn": "记录今日变化",
+    "latest_measured": "最近测量：{{date}}"
+  },
+  "workout": {
+    "title": "开始新训练",
+    "exercise_placeholder": "例如：卧推、深蹲",
+    "start_btn": "开始训练",
+    "finish_btn": "完成训练",
+    "add_set_btn": "添加组数",
+    "set": "组",
+    "weight": "重量",
+    "reps": "次数",
+    "completed": "完成"
+  },
+  "nutrition": {
+    "title": "AI 饮食与营养记录",
+    "meal_types": {
+      "breakfast": "早餐",
+      "lunch": "午餐",
+      "dinner": "晚餐",
+      "snack": "零食"
+    },
+    "food_name": "食物名称",
+    "food_placeholder": "例如：鸡胸肉沙拉",
+    "calories": "卡路里",
+    "protein": "蛋白质",
+    "carbs": "碳水化合物",
+    "fat": "脂肪",
+    "save_btn": "保存今日饮食",
+    "ai_scan": "AI 扫描（准备中）"
+  }
+}

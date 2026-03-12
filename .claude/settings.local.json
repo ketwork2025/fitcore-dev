@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "C:\\Users\\LG\\.gemini\\antigravity\\scratch\\my-saas-project\\apps\\admin",
+      "C:\\Users\\LG\\.gemini\\antigravity\\scratch\\my-saas-project"
+    ],
+    "allow": [
+      "Read(//c/Users/LG/.claude//**)"
+    ]
+  }
+}

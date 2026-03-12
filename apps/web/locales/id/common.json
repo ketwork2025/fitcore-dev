@@ -1,0 +1,52 @@
+{
+  "common": {
+    "title": "FITCORE",
+    "dashboard": "Dasbor",
+    "workout": "Log Latihan",
+    "nutrition": "Log Nutrisi",
+    "inbody": "InBody",
+    "settings": "Pengaturan",
+    "logout": "Keluar",
+    "welcome": "Halo, {{name}}",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "success": "Berhasil!",
+    "error": "Terjadi kesalahan."
+  },
+  "inbody": {
+    "title": "Catat Data InBody",
+    "weight": "Berat Badan",
+    "muscle": "Massa Otot",
+    "fat": "Lemak Tubuh %",
+    "record_btn": "Catat Kemajuan Hari Ini",
+    "latest_measured": "Pengukuran terakhir: {{date}}"
+  },
+  "workout": {
+    "title": "Mulai Latihan Baru",
+    "exercise_placeholder": "mis: Bench Press, Squat",
+    "start_btn": "Mulai Latihan",
+    "finish_btn": "Selesaikan Latihan",
+    "add_set_btn": "Tambah Set",
+    "set": "Set",
+    "weight": "Beban",
+    "reps": "Repetisi",
+    "completed": "Selesai"
+  },
+  "nutrition": {
+    "title": "Log Nutrisi AI",
+    "meal_types": {
+      "breakfast": "Sarapan",
+      "lunch": "Makan Siang",
+      "dinner": "Makan Malam",
+      "snack": "Cemilan"
+    },
+    "food_name": "Nama Makanan",
+    "food_placeholder": "mis: Salad dada ayam",
+    "calories": "Kalori",
+    "protein": "Protein",
+    "carbs": "Karbohidrat",
+    "fat": "Lemak",
+    "save_btn": "Simpan Makanan Hari Ini",
+    "ai_scan": "AI Scan (Segera hadir)"
+  }
+}
