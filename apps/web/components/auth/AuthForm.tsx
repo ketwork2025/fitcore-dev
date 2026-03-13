@@ -15,8 +15,7 @@ export function AuthForm() {
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [error, setError] = useState<string | null>(null);
-  
-  const setUser = useAppStore((state) => state.setUser);
+   const { setUser, setGuest } = useAppStore();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,8 +53,9 @@ export function AuthForm() {
     }
   };
 
-  const handleDemoLogin = () => {
-    setUser({ id: '00000000-0000-0000-0000-000000000000', email: 'demo@fitcore.ai' });
+
+  const handleGuestLogin = () => {
+    setGuest(true);
   };
 
   const handleGoogleLogin = async () => {
@@ -121,10 +121,10 @@ export function AuthForm() {
                 type="button" 
                 variant="outline" 
                 fullWidth 
-                onClick={handleDemoLogin}
-                className="border-fitcore-green/30 text-fitcore-green hover:bg-fitcore-green/10 italic font-black"
+                onClick={handleGuestLogin}
+                className="border-gray-600 text-gray-300 hover:bg-white/5 font-medium"
               >
-                데모 계정으로 바로 체험하기
+                회원가입 없이 대시보드 둘러보기
               </Button>
             </div>
           </form>

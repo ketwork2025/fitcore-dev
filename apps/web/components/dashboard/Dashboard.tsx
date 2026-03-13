@@ -15,11 +15,13 @@ import { Leaderboard } from './Leaderboard';
 import { MyPage } from './MyPage';
 import { AIFoodScanner } from './AIFoodScanner';
 import { AdminDashboardView } from './AdminDashboardView';
+import { TrainerMemberManagement } from './TrainerMemberManagement';
 import { SubscriptionModal } from './SubscriptionModal';
 
 export function Dashboard() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'overview' | 'ranking' | 'mypage' | 'admin'>('overview');
+  const [adminSubTab, setAdminSubTab] = useState<'stats' | 'members'>('members');
   const [showScanner, setShowScanner] = useState(false);
   const [showSubscription, setShowSubscription] = useState(false);
   const user = useAppStore((state) => state.user);
@@ -255,8 +257,22 @@ export function Dashboard() {
         )}
 
         {activeTab === 'admin' && (
-          <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-             <AdminDashboardView />
+          <div className="animate-in fade-in slide-in-from-right-4 duration-500 space-y-6">
+             <div className="flex bg-black/20 p-1 rounded-xl border border-white/5 w-fit">
+                <button 
+                   onClick={() => setAdminSubTab('members')}
+                   className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all ${adminSubTab === 'members' ? 'bg-fitcore-green text-black' : 'text-gray-500 hover:text-white'}`}
+                >
+                   Member Management
+                </button>
+                <button 
+                   onClick={() => setAdminSubTab('stats')}
+                   className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all ${adminSubTab === 'stats' ? 'bg-fitcore-green text-black' : 'text-gray-500 hover:text-white'}`}
+                >
+                   System Stats
+                </button>
+             </div>
+             {adminSubTab === 'members' ? <TrainerMemberManagement /> : <AdminDashboardView />}
           </div>
         )}
         </div>
