@@ -8,6 +8,7 @@ import { Dashboard } from '@/components/dashboard/Dashboard';
 import { InBodyInput } from '@/components/dashboard/InBodyInput';
 import { WorkoutLogger } from '@/components/dashboard/WorkoutLogger';
 import { NutritionLogger } from '@/components/dashboard/NutritionLogger';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { Button } from '@/components/ui/Button';
@@ -73,25 +74,67 @@ export default function UITestPage() {
   return (
     <main className="min-h-screen bg-fitcore-navy text-white p-8">
       <div className="max-w-6xl mx-auto space-y-12">
-        <header className="border-b border-gray-800 pb-6 flex justify-between items-center">
-          <div>
-            <h1 className="text-4xl font-black text-fitcore-green italic tracking-tighter">FITCORE UI LAB</h1>
-            <p className="text-gray-400 mt-2 font-medium">Design System & Full Journey Simulation</p>
-          </div>
+        <header className="flex justify-between items-center bg-black/20 backdrop-blur-md p-4 rounded-3xl border border-white/5 sticky top-0 z-[100] shadow-2xl">
           <div className="flex items-center gap-4">
-            <Button 
-               variant="outline" 
-               className="text-[10px] uppercase font-black tracking-widest border-fitcore-green/20 text-fitcore-green hover:bg-fitcore-green/10"
-               onClick={() => setUser(user ? { ...user, role: user.role === 'admin' ? 'user' : 'admin' } : null)}
-            >
-               Toggle Mock Admin
-            </Button>
-            <LanguageSwitcher />
-            <ThemeSwitcher />
-            {user && (
-               <div className="text-right bg-white/5 px-3 py-1.5 rounded-xl border border-white/5">
-                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Logged in as <span className="text-red-400 font-black">{user.role || 'USER'}</span></p>
-                  <p className="text-sm font-black text-fitcore-green italic">{user.email}</p>
+             <div className="flex flex-col">
+                <h1 className="text-2xl font-black text-fitcore-green italic tracking-tighter leading-none">FITCORE</h1>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1 hidden sm:block">UI LAB • PHASE S4</p>
+             </div>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Dev Controls Group */}
+            <div className="flex items-center bg-white/5 p-1 rounded-2xl border border-white/5">
+              <Button 
+                 variant="ghost" 
+                 className="h-8 w-8 p-0 rounded-xl hover:bg-fitcore-green/20 text-fitcore-green transition-all"
+                 onClick={() => setUser(user ? { ...user, role: user.role === 'admin' ? 'user' : 'admin' } : null)}
+                 title="Toggle Admin Mode"
+              >
+                 <div className={`w-2 h-2 rounded-full animate-pulse ${user?.role === 'admin' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-fitcore-green shadow-[0_0_8px_#39ff14]'}`} />
+              </Button>
+              
+              {!user && (
+                <div className="flex items-center">
+                  <div className="w-[1px] h-4 bg-white/10 mx-1" />
+                  <LanguageSwitcher />
+                  <ThemeSwitcher />
+                </div>
+              )}
+            </div>
+
+            {user ? (
+               <motion.div 
+                 initial={{ opacity: 0, x: 20 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 className="flex items-center gap-3 pl-2 sm:pl-4 border-l border-white/10"
+               >
+                  <div className="text-right hidden md:block">
+                     <p className="text-[10px] text-gray-500 font-black uppercase tracking-tighter leading-none mb-1">Welcome back,</p>
+                     <p className="text-xs font-black text-white italic truncate max-w-[120px]">{user?.email?.split('@')[0]}</p>
+                  </div>
+                  
+                  <div className="relative group cursor-pointer">
+                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-black text-lg border-2 transition-all group-hover:scale-105 ${
+                      user?.role === 'admin' 
+                        ? 'bg-red-500/10 border-red-500/50 text-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]' 
+                        : 'bg-fitcore-green/10 border-fitcore-green/50 text-fitcore-green shadow-[0_0_15px_rgba(57,255,20,0.3)]'
+                    }`}>
+                      {user?.email?.[0]?.toUpperCase()}
+                    </div>
+                    {/* Role Badge */}
+                    <div className={`absolute -top-1 -right-1 px-1.5 py-0.5 rounded-md text-[8px] font-black uppercase tracking-tighter border ${
+                      user?.role === 'admin' 
+                        ? 'bg-red-500 text-white border-red-600' 
+                        : 'bg-fitcore-green text-black border-fitcore-green'
+                    }`}>
+                      {user?.role || 'USER'}
+                    </div>
+                  </div>
+               </motion.div>
+            ) : (
+               <div className="w-10 h-10 rounded-2xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-gray-600 rounded-full" />
                </div>
             )}
           </div>
@@ -145,38 +188,7 @@ export default function UITestPage() {
           )}
         </section>
 
-        {/* 2. Primitives Test */}
-        <section className="space-y-8 pt-12 border-t border-gray-800">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-6 w-1 bg-fitcore-green rounded-full"></div>
-            <h2 className="text-xl font-bold uppercase tracking-widest text-gray-400">02. Design Primitives (Phase S3)</h2>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Button Variants */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Button Variants</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Button variant="primary" fullWidth>Primary Action</Button>
-                <Button variant="secondary" fullWidth>Secondary Action</Button>
-                <Button variant="outline" fullWidth>Outline Action</Button>
-              </CardContent>
-            </Card>
-
-            {/* Input States */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Input States</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input label="Default State" placeholder="Type something..." />
-                <Input label="Error State" placeholder="Wrong value" error="Invalid input provided" />
-              </CardContent>
-            </Card>
-          </div>
-        </section>
 
       </div>
     </main>

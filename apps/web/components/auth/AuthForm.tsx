@@ -55,7 +55,7 @@ export function AuthForm() {
   };
 
   const handleDemoLogin = () => {
-    setUser({ id: 'demo-user-id', email: 'demo@fitcore.ai' });
+    setUser({ id: '00000000-0000-0000-0000-000000000000', email: 'demo@fitcore.ai' });
   };
 
   return (

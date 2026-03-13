@@ -1,0 +1,28 @@
+
+> web@0.1.0 build C:\Users\Kang Chul Ho\.project_fitcore\apps\web
+> next build
+
+??Next.js 16.1.5 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+??Compiled successfully in 7.6s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/6) ...
+?뙋 i18next is made possible by our own product, Locize ??consider powering your project with managed localization (AI, CDN, integrations): https://locize.com ?뮋
+  Generating static pages using 7 workers (1/6) 
+  Generating static pages using 7 workers (2/6) 
+  Generating static pages using 7 workers (4/6) 
+??Generating static pages using 7 workers (6/6) in 1119.3ms
+  Finalizing page optimization ...
+
+Route (app)
+????/
+????/_not-found
+????/admin-preview
+????/ui-test
+
+
+?? (Static)  prerendered as static content
+

@@ -229,7 +229,10 @@ export function Dashboard() {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden mb-6"
                   >
-                    <AIFoodScanner />
+                    <AIFoodScanner 
+                      onAnalysisComplete={(data) => console.log('Scanned:', data)} 
+                      onClose={() => setShowScanner(false)} 
+                    />
                   </motion.div>
                 )}
               </AnimatePresence>

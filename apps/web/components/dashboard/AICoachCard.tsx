@@ -91,7 +91,7 @@ export function AICoachCard() {
              </div>
 
              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button onClick={handleStartWorkout} className="flex-1 gap-2 h-12 text-sm">
+                <Button onClick={handleStartWorkout} className="flex-1 gap-2 h-12 text-sm whitespace-nowrap">
                    <Play className="w-4 h-4 fill-current" />
                    {t('coach.start_btn')}
                 </Button>

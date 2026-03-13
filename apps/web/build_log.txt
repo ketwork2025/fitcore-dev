@@ -1,0 +1,25 @@
+
+> web@0.1.0 build C:\Users\Kang Chul Ho\.project_fitcore\apps\web
+> next build
+
+??Next.js 16.1.5 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+??Compiled successfully in 6.5s
+  Running TypeScript ...
+Failed to compile.
+
+./app/admin-preview/page.tsx:18:16
+Type error: Type '{}' is missing the following properties from type '{ onAnalysisComplete: (data: any) => void; onClose: () => void; }': onAnalysisComplete, onClose
+
+  16 |            <h2 className="text-sm font-black text-white uppercase tracking-widest bg-white/5 inline-block px-3 py-1 rounded border border-white/10 italic">Feature A: AI Diet Analysis</h2>
+  17 |            <div className="max-w-2xl">
+> 18 |               <AIFoodScanner />
+     |                ^
+  19 |            </div>
+  20 |         </section>
+  21 |
+Next.js build worker exited with code: 1 and signal: null
+?덭RR_PNPM_RECURSIVE_RUN_FIRST_FAIL??web@0.1.0 build: `next build`
+Exit status 1

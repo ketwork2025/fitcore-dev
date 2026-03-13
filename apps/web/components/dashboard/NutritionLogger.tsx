@@ -10,6 +10,7 @@ import { Button } from '../ui/Button';
 import { supabase } from '@/lib/supabase/client';
 import { useAppStore } from '@/stores/appStore';
 import { useQueryClient } from '@tanstack/react-query';
+import { AIFoodScanner } from './AIFoodScanner';
 
 export function NutritionLogger() {
   const { t } = useTranslation();
@@ -24,6 +25,15 @@ export function NutritionLogger() {
   const [fat, setFat] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
+
+  const handleAIAnalysis = (data: any) => {
+    setFoodName(data.name);
+    setCalories(data.calories.toString());
+    setProtein(data.protein.toString());
+    setCarbs(data.carbs.toString());
+    setFat(data.fat.toString());
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,13 +82,33 @@ export function NutritionLogger() {
           </div>
           <CardTitle>{t('nutrition.title')}</CardTitle>
         </div>
-        <Button variant="secondary" className="text-xs h-8 px-3 gap-2 border-fitcore-green/30 text-fitcore-green">
+        <Button 
+          variant={showScanner ? "primary" : "outline"} 
+          className="text-xs h-8 px-3 gap-2 border-fitcore-green/30 text-fitcore-green"
+          onClick={() => setShowScanner(!showScanner)}
+        >
           <Camera className="w-3.5 h-3.5" />
-          {t('nutrition.ai_scan')}
+          {showScanner ? "Close Scanner" : t('nutrition.ai_scan')}
         </Button>
       </CardHeader>
 
       <CardContent className="pt-6">
+        <AnimatePresence>
+          {showScanner && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden mb-8"
+            >
+              <AIFoodScanner 
+                onAnalysisComplete={handleAIAnalysis} 
+                onClose={() => setShowScanner(false)} 
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-4">
@@ -174,7 +204,7 @@ export function NutritionLogger() {
           <Info className="w-5 h-5 text-fitcore-green mt-0.5" />
           <p className="text-xs text-gray-300 leading-relaxed">
             <span className="text-fitcore-green font-bold">New:</span> 이제 사진 한 장으로 식단을 기록할 수 있습니다. 
-            상단의 <span className="text-fitcore-green font-black">AI Scan Mode</span> 버튼을 클릭하여 <span className="text-white font-bold">Gemini AI</span>의 분석을 경험해보세요!
+            상단의 <span className="text-fitcore-green font-black">AI Scan</span> 버튼을 클릭하여 <span className="text-white font-bold">Gemini AI</span>의 분석을 경험해보세요!
           </p>
         </div>
       </CardContent>

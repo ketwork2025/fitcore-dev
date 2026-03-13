@@ -15,7 +15,7 @@ export default function AdminPreviewPage() {
         <section className="space-y-6">
            <h2 className="text-sm font-black text-white uppercase tracking-widest bg-white/5 inline-block px-3 py-1 rounded border border-white/10 italic">Feature A: AI Diet Analysis</h2>
            <div className="max-w-2xl">
-              <AIFoodScanner />
+              <AIFoodScanner onAnalysisComplete={() => {}} onClose={() => {}} />
            </div>
         </section>
 

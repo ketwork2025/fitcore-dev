@@ -2,12 +2,21 @@
 
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Camera, Upload, Loader2, Check, RefreshCw, Sparkles, Scan } from 'lucide-react';
+import { Camera, Upload, Loader2, Check, RefreshCw, Sparkles, Scan, X } from 'lucide-react';
+import { analyzeFoodImage } from '@/lib/gemini';
+import { Button } from '../ui/Button';
 
-export function AIFoodScanner() {
+export function AIFoodScanner({ 
+  onAnalysisComplete, 
+  onClose 
+}: { 
+  onAnalysisComplete: (data: any) => void;
+  onClose: () => void;
+}) {
   const [isScanning, setIsScanning] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<any | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,33 +24,40 @@ export function AIFoodScanner() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result as string);
-        simulateScan();
+        const base64 = reader.result as string;
+        setPreview(base64);
+        performAIScan(base64);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const simulateScan = () => {
+  const performAIScan = async (base64: string) => {
     setIsScanning(true);
     setResult(null);
+    setError(null);
     
-    // Simulate AI Processing time
-    setTimeout(() => {
+    try {
+      const analysis = await analyzeFoodImage(base64);
+      setResult(analysis);
+    } catch (err) {
+      console.error(err);
+      setError("AI 분석에 실패했습니다. 다시 시도해주세요.");
+    } finally {
       setIsScanning(false);
-      setResult({
-        name: "Grilled Chicken Breast & Salad",
-        calories: 385,
-        carbs: 12,
-        protein: 42,
-        fat: 18,
-        confidence: 98
-      });
-    }, 3000);
+    }
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative">
+      <button 
+        onClick={onClose}
+        className="absolute -top-12 right-0 p-2 bg-red-500/10 text-red-500 rounded-full hover:bg-red-500/20 transition-colors z-50 flex items-center gap-2"
+      >
+        <X className="w-4 h-4" />
+        <span className="text-[10px] font-black uppercase">Close Scanner</span>
+      </button>
+
       <div className="relative group">
         {!preview ? (
           <div 
@@ -80,6 +96,15 @@ export function AIFoodScanner() {
                </div>
             )}
 
+            {error && (
+               <div className="absolute inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-40 p-6 text-center">
+                  <div className="space-y-4">
+                     <p className="text-red-400 font-bold">{error}</p>
+                     <Button variant="outline" onClick={() => setPreview(null)}>다시 시도</Button>
+                  </div>
+               </div>
+            )}
+
             {!isScanning && result && (
                <motion.div 
                  initial={{ opacity: 0, y: 20 }}
@@ -109,8 +134,8 @@ export function AIFoodScanner() {
                      <button 
                        className="flex-1 bg-fitcore-green py-2 rounded-xl text-black text-xs font-black uppercase shadow-[0_0_15px_rgba(57,255,20,0.4)] hover:scale-105 transition-all"
                        onClick={() => {
-                          setPreview(null);
-                          setResult(null);
+                          onAnalysisComplete(result);
+                          onClose();
                        }}
                      >
                         Apply To Log
