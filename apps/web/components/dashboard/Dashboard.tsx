@@ -16,6 +16,7 @@ import { MyPage } from './MyPage';
 import { AIFoodScanner } from './AIFoodScanner';
 import { AdminDashboardView } from './AdminDashboardView';
 import { TrainerMemberManagement } from './TrainerMemberManagement';
+import { BodyMeasurementGrid } from './BodyMeasurementGrid';
 import { SubscriptionModal } from './SubscriptionModal';
 
 export function Dashboard() {
@@ -184,6 +185,11 @@ export function Dashboard() {
                 <div className="lg:col-span-2">
                   <ProgressChart />
                 </div>
+              </div>
+              
+              {/* New: Body Measurement Tracking */}
+              <div className="mt-8">
+                <BodyMeasurementGrid />
               </div>
             </section>
 
