@@ -110,8 +110,33 @@ export default function UITestPage() {
           </div>
           
           {user ? (
-            <div className="animate-in fade-in duration-700">
-               <Dashboard />
+            <div className="animate-in fade-in duration-700 space-y-12">
+               {/* Phase S2/S4: Service Integration Components */}
+               <div className="space-y-8">
+                  <header className="border-l-4 border-fitcore-green pl-4">
+                     <h2 className="text-xl font-black italic text-white uppercase tracking-wider">01. Service Integration (Phase S2/S4)</h2>
+                     <p className="text-xs text-gray-500 font-bold uppercase">Manual Input & Logging System</p>
+                  </header>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                     <div className="space-y-8">
+                        <WorkoutLogger />
+                        <InBodyInput />
+                     </div>
+                     <div className="space-y-8">
+                        <NutritionLogger />
+                     </div>
+                  </div>
+               </div>
+
+               {/* Final Integrated Dashboard */}
+               <div className="pt-16 border-t border-gray-800">
+                  <header className="mb-8">
+                     <h2 className="text-2xl font-black italic text-fitcore-green uppercase tracking-tighter">Final Product Layout</h2>
+                     <p className="text-sm text-gray-400">Integrated Dashboard & AI Coach Profile</p>
+                  </header>
+                  <Dashboard />
+               </div>
             </div>
           ) : (
             <div className="max-w-md mx-auto py-12">
