@@ -17,6 +17,7 @@ import { AIFoodScanner } from './AIFoodScanner';
 import { AdminDashboardView } from './AdminDashboardView';
 import { TrainerMemberManagement } from './TrainerMemberManagement';
 import { BodyMeasurementGrid } from './BodyMeasurementGrid';
+import { ReportShareButton } from './ReportShareButton';
 import { SubscriptionModal } from './SubscriptionModal';
 
 export function Dashboard() {
@@ -129,36 +130,39 @@ export function Dashboard() {
              <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{t('tabs.mode_active', { mode: t(`tabs.${activeTab}`) })}</p>
           </div>
 
-          <div className="flex items-center gap-2 bg-black/20 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
-             {[
-                { id: 'overview', icon: <LayoutDashboard className="w-4 h-4" /> },
-                { id: 'ranking', icon: <Trophy className="w-4 h-4" /> },
-                { id: 'mypage', icon: <User className="w-4 h-4" /> },
-                ...(user?.role === 'admin' ? [{ id: 'admin', icon: <Shield className="w-4 h-4" /> }] : [])
-             ].map((tab) => (
-                <button
-                   key={tab.id}
-                   onClick={() => setActiveTab(tab.id as any)}
-                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      activeTab === tab.id 
-                      ? 'bg-fitcore-green text-black shadow-[0_0_20px_rgba(57,255,20,0.3)]' 
-                      : 'text-gray-500 hover:text-white hover:bg-white/5'
-                   }`}
-                >
-                   {tab.icon}
-                   <span className="hidden md:inline uppercase">{t(`tabs.${tab.id}`)}</span>
-                </button>
-             ))}
-             <div className="w-px h-8 bg-white/10 mx-1" />
-             <button onClick={handleLogout} className="p-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-500 transition-colors">
-                <LogOut className="w-4 h-4" />
-             </button>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 bg-black/20 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
+              {[
+                  { id: 'overview', icon: <LayoutDashboard className="w-4 h-4" /> },
+                  { id: 'ranking', icon: <Trophy className="w-4 h-4" /> },
+                  { id: 'mypage', icon: <User className="w-4 h-4" /> },
+                  ...(user?.role === 'admin' ? [{ id: 'admin', icon: <Shield className="w-4 h-4" /> }] : [])
+              ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as any)}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                        activeTab === tab.id 
+                        ? 'bg-fitcore-green text-black shadow-[0_0_20px_rgba(57,255,20,0.3)]' 
+                        : 'text-gray-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {tab.icon}
+                    <span className="hidden md:inline uppercase">{t(`tabs.${tab.id}`)}</span>
+                  </button>
+              ))}
+              <div className="w-px h-8 bg-white/10 mx-1" />
+              <button onClick={handleLogout} className="p-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-500 transition-colors">
+                  <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+            <ReportShareButton />
           </div>
         </div>
 
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
         {activeTab === 'overview' && (
-          <div className="space-y-8">
+          <div id="dashboard-overview" className="space-y-8 bg-fitcore-navy overflow-hidden">
             {/* 0. AI Coach Section */}
             <section>
               <AICoachCard />
