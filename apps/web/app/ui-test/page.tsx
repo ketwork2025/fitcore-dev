@@ -76,6 +76,7 @@ export default function UITestPage() {
         <header className="border-b border-gray-800 pb-6 flex justify-between items-center">
           <div>
             <h1 className="text-4xl font-black text-fitcore-green italic tracking-tighter">FITCORE UI LAB</h1>
+            <p className="text-gray-400 mt-2 font-medium">Design System & Full Journey Simulation</p>
           </div>
           <div className="flex items-center gap-4">
             <Button 
@@ -98,7 +99,15 @@ export default function UITestPage() {
 
         {/* 1. Dashboard & Auth Integration Test */}
         <section className="space-y-6">
-          <div className="py-4"></div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <div className="h-6 w-1 bg-fitcore-green rounded-full"></div>
+              <h2 className="text-xl font-black uppercase tracking-tighter italic text-white">01. Service Integration Experience</h2>
+            </div>
+            <div className="px-3 py-1 bg-white/5 rounded-full border border-white/10">
+               <span className="text-[10px] text-gray-400 font-bold">STABLE VERSION S4.2</span>
+            </div>
+          </div>
           
           {user ? (
             <div className="animate-in fade-in duration-700">
@@ -109,6 +118,39 @@ export default function UITestPage() {
                <AuthForm />
             </div>
           )}
+        </section>
+
+        {/* 2. Primitives Test */}
+        <section className="space-y-8 pt-12 border-t border-gray-800">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="h-6 w-1 bg-fitcore-green rounded-full"></div>
+            <h2 className="text-xl font-bold uppercase tracking-widest text-gray-400">02. Design Primitives (Phase S3)</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Button Variants */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Button Variants</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button variant="primary" fullWidth>Primary Action</Button>
+                <Button variant="secondary" fullWidth>Secondary Action</Button>
+                <Button variant="outline" fullWidth>Outline Action</Button>
+              </CardContent>
+            </Card>
+
+            {/* Input States */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Input States</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Input label="Default State" placeholder="Type something..." />
+                <Input label="Error State" placeholder="Wrong value" error="Invalid input provided" />
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
       </div>
