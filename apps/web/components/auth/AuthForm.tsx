@@ -58,6 +58,20 @@ export function AuthForm() {
     setUser({ id: '00000000-0000-0000-0000-000000000000', email: 'demo@fitcore.ai' });
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/ui-test`,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err.message || 'Google 로그인에 실패했습니다.');
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -133,13 +147,19 @@ export function AuthForm() {
             </div>
           </div>
 
-          <div className="mt-6 flex gap-3">
-            <Button variant="secondary" fullWidth className="h-[48px]">
-              Google
-            </Button>
-            <Button variant="secondary" fullWidth className="h-[48px]">
-              Apple
-            </Button>
+          <div className="mt-6 flex flex-col gap-3">
+            <button 
+              onClick={handleGoogleLogin}
+              className="w-full h-[52px] bg-white text-[#3c4043] font-medium rounded-full flex items-center justify-center gap-3 border border-[#dadce0] hover:bg-[#f7f8f8] transition-colors overflow-hidden px-4 shadow-[0_1px_2px_rgba(60,64,67,0.3),0_1px_3px_rgba(60,64,67,0.15)]"
+            >
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5 flex-shrink-0" />
+              <span className="text-[15px] font-medium tracking-[0.25px]">Google 계정으로 계속하기</span>
+            </button>
+            <div className="flex gap-3">
+              <Button variant="secondary" fullWidth className="h-[48px] rounded-xl">
+                Apple
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
