@@ -70,7 +70,12 @@ export function WorkoutLogger() {
       const isJunk = ['#', '(', '0', '1', '5', 'False', 'MAX', 'lb', 'ⓒ', '날짜', '간식', '단백질', '탄수화물', '지방', '수분', '숙면', '컨디션', '피드백', '한줄평'].some(ex => w.includes(ex));
       return w.length >= 2 && !isJunk;
     })
-    .filter(w => exerciseName && w.toLowerCase().includes(exerciseName.toLowerCase()))
+    .filter(w => {
+      if (!exerciseName) return false;
+      const search = exerciseName.replace(/\s+/g, '').toLowerCase();
+      const target = w.replace(/\s+/g, '').toLowerCase();
+      return target.includes(search);
+    })
     .sort((a, b) => {
       const search = exerciseName.toLowerCase();
       const aStarts = a.toLowerCase().startsWith(search);
@@ -204,7 +209,7 @@ export function WorkoutLogger() {
   if (!mounted) return null;
 
   return (
-    <Card className="backdrop-blur-xl shadow-[0_0_20px_rgba(57,255,20,0.1)]">
+    <Card className="backdrop-blur-xl shadow-[0_0_20px_rgba(57,255,20,0.1)] !overflow-visible">
       <CardHeader className="flex flex-row items-center justify-between pb-4">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-fitcore-green/10 rounded-lg border border-fitcore-green/30">
@@ -226,6 +231,7 @@ export function WorkoutLogger() {
                   setExerciseName(e.target.value);
                   setShowSuggestions(true);
                 }}
+                onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
               />
               <AnimatePresence>
