@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Activity, X, Check, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -21,9 +21,46 @@ export function InBodyInput({ onSuccess }: { onSuccess?: () => void }) {
   const [fat, setFat] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const isGuest = useAppStore((state) => state.isGuest);
+  const STORAGE_KEY = 'fitcore_guest_inbody';
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // [Strategy - Beomsu] Persist InBody for Guests
+  useEffect(() => {
+    if (mounted && isGuest) {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setWeight(parsed.weight || '');
+          setMuscle(parsed.muscle || '');
+          setFat(parsed.fat || '');
+        } catch (e) {
+          console.error('Failed to parse saved inbody', e);
+        }
+      }
+    }
+  }, [mounted, isGuest]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isGuest) {
+      setLoading(true);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ weight, muscle, fat }));
+      setTimeout(() => {
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 2000);
+      }, 600);
+      return;
+    }
+
     if (!user) return;
     
     setLoading(true);
@@ -56,6 +93,8 @@ export function InBodyInput({ onSuccess }: { onSuccess?: () => void }) {
       setLoading(false);
     }
   };
+
+  if (!mounted) return null;
 
   return (
     <Card className="backdrop-blur-xl shadow-[0_0_20px_rgba(57,255,20,0.1)]">
