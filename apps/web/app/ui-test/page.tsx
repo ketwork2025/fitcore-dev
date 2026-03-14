@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
 export default function UITestPage() {
-  const { user, setUser, setLoading, isLoading, isGuest, logout } = useAppStore();
+  const { user, setUser, setLoading, isLoading, isGuest, logout, setGuest } = useAppStore();
 
   useEffect(() => {
     // 1. 초기 세션 확인
@@ -36,6 +36,10 @@ export default function UITestPage() {
           email: session.user.email!,
           role: profile?.role as any
         });
+      } else {
+        // Automatically enter guest mode if no session found 
+        // [Planning - Beomsu] PLG Strategy: Value first, Auth later
+        setGuest(true);
       }
       setLoading(false);
     };
@@ -123,17 +127,17 @@ export default function UITestPage() {
                >
                   <div className="text-right hidden md:block">
                      <p className="text-[10px] text-gray-500 font-black uppercase tracking-tighter leading-none mb-1">
-                        {isGuest ? 'Viewing as' : 'Welcome back,'}
+                        {isGuest ? 'Trial Mode' : 'Welcome back,'}
                      </p>
-                     <p className="text-xs font-black text-white italic truncate max-w-[120px]">
+                     <p className={`text-xs font-black italic truncate max-w-[120px] ${isGuest ? 'text-fitcore-green' : 'text-white'}`}>
                         {isGuest ? 'GUEST_EXPLORER' : user?.email?.split('@')[0]}
                      </p>
                   </div>
                   
-                  <div className="relative group cursor-pointer" onClick={() => logout()}>
+                  <div className="relative group cursor-pointer" onClick={() => logout()} title={isGuest ? "Sign In / Sign Up" : "Logout"}>
                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-black text-lg border-2 transition-all group-hover:scale-105 ${
                       isGuest 
-                        ? 'bg-gray-500/10 border-gray-500/50 text-gray-500'
+                        ? 'bg-fitcore-green/5 border-fitcore-green/20 text-fitcore-green/50 opacity-80'
                         : user?.role === 'admin' 
                         ? 'bg-red-500/10 border-red-500/50 text-red-500 shadow-[0_0_15px_rgba(239,68,68,0.3)]' 
                         : 'bg-fitcore-green/10 border-fitcore-green/50 text-fitcore-green shadow-[0_0_15px_rgba(57,255,20,0.3)]'
