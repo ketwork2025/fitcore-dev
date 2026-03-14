@@ -19,6 +19,7 @@ import { TrainerMemberManagement } from './TrainerMemberManagement';
 import { BodyMeasurementGrid } from './BodyMeasurementGrid';
 import { ReportShareButton } from './ReportShareButton';
 import { SubscriptionModal } from './SubscriptionModal';
+import { InBodyDisplay } from './InBodyDisplay';
 
 export function Dashboard() {
   const { t } = useTranslation();
@@ -178,13 +179,7 @@ export function Dashboard() {
                       {t('common.inbody')}
                     </h3>
                   </div>
-                  <Card className="backdrop-blur-md overflow-hidden h-full">
-                    <CardContent className="p-5 space-y-7">
-                      <InBodyRow label={t('inbody.weight')} value={inbody?.weight_kg || 0} unit="kg" progress={60} />
-                      <InBodyRow label={t('inbody.muscle')} value={inbody?.muscle_mass_kg || 0} unit="kg" progress={85} color="fitcore-green" glow />
-                      <InBodyRow label={t('inbody.fat')} value={inbody?.body_fat_percentage || 0} unit="%" progress={38} color="blue-400" />
-                    </CardContent>
-                  </Card>
+                  <InBodyDisplay data={inbody} />
                 </div>
                 <div className="lg:col-span-2">
                   <ProgressChart />
@@ -299,28 +294,6 @@ export function Dashboard() {
   );
 }
 
-function InBodyRow({ label, value, unit, progress, color = "gray-300", glow = false }: any) {
-  return (
-    <div className="flex items-center">
-      <div className="w-[100px] flex flex-col flex-shrink-0">
-        <span className="text-gray-300 font-medium text-sm">{label}</span>
-        <span className="text-xl font-extrabold text-white">{value} <span className="text-xs font-normal text-gray-500">{unit}</span></span>
-      </div>
-      <div className="flex-1 px-4 relative flex items-center h-full">
-         <div className="absolute inset-y-0 left-[33%] w-[1px] bg-gray-700/50" />
-         <div className="absolute inset-y-0 left-[66%] w-[1px] bg-gray-700/50" />
-        <div className="relative h-2.5 w-full bg-gray-800 rounded-full flex z-10">
-          <motion.div 
-            initial={{ width: 0 }} 
-            animate={{ width: `${progress}%` }} 
-            transition={{ duration: 1, ease: "easeOut" }} 
-            className={`h-full bg-${color} rounded-full ${glow ? 'shadow-[0_0_12px_rgba(57,255,20,0.6)]' : ''}`} 
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function WorkoutCard({ workout }: any) {
   return (
