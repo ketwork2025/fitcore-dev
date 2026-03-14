@@ -15,6 +15,7 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { GoalOnboarding } from '@/components/dashboard/GoalOnboarding';
 import { AIAdvisor } from '@/components/dashboard/AIAdvisor';
 import { Button } from '@/components/ui/Button';
+import { Target } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
@@ -121,6 +122,17 @@ export default function UITestPage() {
                 </div>
               )}
             </div>
+
+            {(user || isGuest) && (
+              <Button
+                variant="ghost"
+                className="h-10 w-10 p-0 rounded-2xl bg-white/5 border border-white/5 hover:bg-fitcore-green/20 hover:text-fitcore-green transition-all"
+                onClick={() => useAppStore.getState().setShowGoalSettings(true)}
+                title="나의 목표 수정"
+              >
+                <Target className="w-5 h-5" />
+              </Button>
+            )}
 
             {(user || isGuest) ? (
                <motion.div 
