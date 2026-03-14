@@ -13,7 +13,9 @@
       "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem ''C:\\\\Users\\\\Kang Chul Ho'' | Where-Object { $_FullName -notlike ''*OneDrive*'' } | Select-Object Name, Attributes | Format-Table -AutoSize\")",
       "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\backup_scan.ps1\")",
       "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\check_sizes.ps1\")",
-      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\do_backup.ps1\")"
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\do_backup.ps1\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-CimInstance Win32_PhysicalMemory | Select-Object BankLabel, Capacity, Speed, Manufacturer, PartNumber | Format-Table -AutoSize\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer, Model, SystemFamily, SystemSKUNumber | Format-List\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\LG\\.gemini\\antigravity\\scratch\\my-saas-project\\apps\\admin",

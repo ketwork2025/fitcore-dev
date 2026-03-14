@@ -95,27 +95,24 @@ export default function UITestPage() {
           <div className="flex items-center gap-2 sm:gap-4">
             {/* Dev Controls Group */}
             <div className="flex items-center bg-white/5 p-1 rounded-2xl border border-white/5">
-              <Button 
-                 variant="ghost" 
-                 className="h-8 w-8 p-0 rounded-xl hover:bg-fitcore-green/20 text-fitcore-green transition-all"
+              <button 
                  onClick={() => {
                     if (user) {
                        setUser({ ...user, role: user.role === 'admin' ? 'user' : 'admin' });
                     } else if (isGuest) {
-                       // If guest, we promote to a 'guest-admin' for testing
                        setUser({ id: 'guest-id', email: 'guest@fitcore.ai', role: 'admin' });
                     } else {
-                       // If neither, just toggle a demo admin
                        setUser({ id: 'demo-admin', email: 'admin@fitcore.ai', role: 'admin' });
                     }
                  }}
-                  title="Toggle Admin Mode"
-               >
+                 className="h-10 w-10 flex items-center justify-center rounded-2xl hover:bg-white/10 transition-all text-fitcore-green"
+                 title="Toggle Admin Mode"
+              >
                   <div className="relative">
-                    <Shield className={`w-4 h-4 transition-colors ${user?.role === 'admin' ? 'text-red-500' : 'text-fitcore-green'}`} />
-                    <div className={`absolute -top-1 -right-1 w-2 h-2 rounded-full animate-pulse ${user?.role === 'admin' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-fitcore-green shadow-[0_0_8px_#39ff14]'}`} />
+                    <Shield className={`w-5 h-5 transition-colors ${user?.role === 'admin' ? 'text-red-500' : 'text-fitcore-green'}`} />
+                    <div className={`absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full animate-pulse ${user?.role === 'admin' ? 'bg-red-500 shadow-[0_0_10px_#ef4444]' : 'bg-fitcore-green shadow-[0_0_10px_#39ff14]'}`} />
                   </div>
-               </Button>
+               </button>
               
               {!user && !isGuest && (
                 <div className="flex items-center">
@@ -127,14 +124,15 @@ export default function UITestPage() {
             </div>
 
             {(user || isGuest) && (
-              <Button
-                variant="ghost"
-                className="h-10 w-10 p-0 rounded-2xl bg-white/5 border border-white/5 text-fitcore-green hover:bg-fitcore-green/20 transition-all flex items-center justify-center"
+              <button
+                className="h-10 w-10 flex items-center justify-center rounded-2xl bg-white/5 border border-white/5 text-fitcore-green hover:bg-fitcore-green/20 transition-all"
                 onClick={() => useAppStore.getState().setShowGoalSettings(true)}
                 title="나의 목표 수정"
               >
-                <Target className="w-5 h-5" />
-              </Button>
+                <div className="relative flex items-center justify-center w-5 h-5">
+                  <Target className="w-5 h-5 flex-shrink-0" />
+                </div>
+              </button>
             )}
 
             {(user || isGuest) ? (
