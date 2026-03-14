@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dumbbell, Plus, Check, Play, Loader2 } from 'lucide-react';
+import { Dumbbell, Plus, Check, Play, Loader2, Trash2, X, RotateCcw } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -66,9 +66,20 @@ export function WorkoutLogger() {
   }, [mounted, isGuest, activeSession, sets, exerciseName]);
 
   const filteredWorkouts = workoutsData
-    .filter(w => w.length > 2 && !['#', '(', '0', '1', '5', 'False', 'MAX', 'lb', 'ⓒ', '날짜', '간식', '단백질', '탄수화물', '지방', '수분', '숙면', '컨디션', '피드백', '한줄평'].some(ex => w.includes(ex)))
-    .filter(w => w.includes(exerciseName))
-    .slice(0, 5);
+    .filter(w => {
+      const isJunk = ['#', '(', '0', '1', '5', 'False', 'MAX', 'lb', 'ⓒ', '날짜', '간식', '단백질', '탄수화물', '지방', '수분', '숙면', '컨디션', '피드백', '한줄평'].some(ex => w.includes(ex));
+      return w.length >= 2 && !isJunk;
+    })
+    .filter(w => exerciseName && w.toLowerCase().includes(exerciseName.toLowerCase()))
+    .sort((a, b) => {
+      const search = exerciseName.toLowerCase();
+      const aStarts = a.toLowerCase().startsWith(search);
+      const bStarts = b.toLowerCase().startsWith(search);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      return a.localeCompare(b);
+    })
+    .slice(0, 8);
 
   // 운동 시작 (세션 생성)
   const startWorkout = async () => {
@@ -108,6 +119,22 @@ export function WorkoutLogger() {
   // 세트 추가
   const addSet = () => {
     setSets([...sets, { weight: sets[sets.length - 1]?.weight || '', reps: sets[sets.length - 1]?.reps || '', completed: false }]);
+  };
+
+  // 세트 삭제
+  const removeSet = (index: number) => {
+    if (sets.length <= 1) return;
+    const newSets = sets.filter((_, i) => i !== index);
+    setSets(newSets);
+  };
+
+  // 운동 취소 (전체 삭제)
+  const cancelWorkout = () => {
+    if (window.confirm('기록 중인 운동을 정말 취소하시겠습니까? 데이터가 저장되지 않습니다.')) {
+      setActiveSession(null);
+      setExerciseName('');
+      setSets([]);
+    }
   };
 
   // 세트 기록 저장
@@ -207,20 +234,25 @@ export function WorkoutLogger() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 right-0 mt-1 bg-gray-900 border border-gray-800 rounded-xl overflow-hidden z-[110] shadow-2xl"
+                    className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border-2 border-fitcore-green/50 rounded-xl overflow-hidden z-[200] shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
                   >
-                    {filteredWorkouts.map((w, i) => (
-                      <button
-                        key={i}
-                        className="w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-fitcore-green hover:text-black font-bold transition-colors border-b border-gray-800 last:border-0"
-                        onClick={() => {
-                          setExerciseName(w);
-                          setShowSuggestions(false);
-                        }}
-                      >
-                        {w}
-                      </button>
-                    ))}
+                    <div className="max-h-60 overflow-y-auto custom-scrollbar">
+                      {filteredWorkouts.map((w, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          className="w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-fitcore-green hover:text-black font-bold transition-all border-b border-white/5 last:border-0 flex items-center gap-2"
+                          onMouseDown={(e) => {
+                            e.preventDefault(); // Prevent onBlur from hiding suggestions before click
+                            setExerciseName(w);
+                            setShowSuggestions(false);
+                          }}
+                        >
+                          <Plus className="w-3 h-3 opacity-50" />
+                          {w}
+                        </button>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -245,57 +277,83 @@ export function WorkoutLogger() {
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex items-center gap-3 p-3 rounded-xl border ${set.completed ? 'bg-fitcore-green/5 border-fitcore-green/30' : 'bg-black/20 border-gray-800'}`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">
+                  <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400 shrink-0">
                     {idx + 1}
                   </div>
                   <div className="flex-1 grid grid-cols-2 gap-2">
-                    <input
-                      type="number"
-                      placeholder="kg"
-                      value={set.weight}
-                      onChange={(e) => {
-                        const n = [...sets];
-                        if (n[idx]) n[idx]!.weight = e.target.value;
-                        setSets(n);
-                      }}
-                      disabled={set.completed}
-                      className="w-full bg-transparent border-b border-gray-700 focus:border-fitcore-green outline-none text-center py-1 text-white"
-                    />
-                    <input
-                      type="number"
-                      placeholder="reps"
-                      value={set.reps}
-                      onChange={(e) => {
-                        const n = [...sets];
-                        if (n[idx]) n[idx]!.reps = e.target.value;
-                        setSets(n);
-                      }}
-                      disabled={set.completed}
-                      className="w-full bg-transparent border-b border-gray-700 focus:border-fitcore-green outline-none text-center py-1 text-white"
-                    />
+                    <div className="relative">
+                      <input
+                        type="number"
+                        placeholder="kg"
+                        value={set.weight}
+                        onChange={(e) => {
+                          const n = [...sets];
+                          if (n[idx]) n[idx]!.weight = e.target.value;
+                          setSets(n);
+                        }}
+                        disabled={set.completed}
+                        className="w-full bg-transparent border-b border-gray-700 focus:border-fitcore-green outline-none text-center py-1 text-white text-sm"
+                      />
+                      <span className="absolute right-0 bottom-1 text-[10px] text-gray-600 font-bold">KG</span>
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        placeholder="reps"
+                        value={set.reps}
+                        onChange={(e) => {
+                          const n = [...sets];
+                          if (n[idx]) n[idx]!.reps = e.target.value;
+                          setSets(n);
+                        }}
+                        disabled={set.completed}
+                        className="w-full bg-transparent border-b border-gray-700 focus:border-fitcore-green outline-none text-center py-1 text-white text-sm"
+                      />
+                      <span className="absolute right-0 bottom-1 text-[10px] text-gray-600 font-bold">REPS</span>
+                    </div>
                   </div>
-                  <button
-                    onClick={() => toggleSetComplete(idx)}
-                    disabled={set.completed || !set.weight || !set.reps}
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-                      set.completed 
-                        ? 'bg-fitcore-green text-black' 
-                        : 'bg-gray-800 text-gray-400 hover:bg-fitcore-green/20 hover:text-fitcore-green'
-                    }`}
-                  >
-                    {set.completed ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                  </button>
+                  
+                  <div className="flex gap-1">
+                    {!set.completed && sets.length > 1 && (
+                      <button
+                        onClick={() => removeSet(idx)}
+                        className="w-10 h-10 rounded-lg flex items-center justify-center text-red-500/50 hover:text-white hover:bg-red-500 transition-all border border-red-500/20"
+                        title="세트 삭제"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => toggleSetComplete(idx)}
+                      disabled={set.completed || !set.weight || !set.reps}
+                      className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                        set.completed 
+                          ? 'bg-fitcore-green text-black' 
+                          : 'bg-gray-800 text-gray-400 hover:bg-fitcore-green/20 hover:text-fitcore-green'
+                      }`}
+                    >
+                      {set.completed ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </motion.div>
               ))}
             </div>
 
-            <div className="flex gap-3">
-              <Button variant="secondary" fullWidth onClick={addSet}>
-                세트 추가
-              </Button>
-              <Button fullWidth onClick={finishWorkout}>
-                운동 완료 (종료)
-              </Button>
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-3">
+                <Button variant="secondary" fullWidth onClick={addSet} className="bg-white/5 border-white/10 hover:bg-white/10">
+                  <Plus className="w-4 h-4 mr-2" /> 세트 추가
+                </Button>
+                <Button fullWidth onClick={finishWorkout} className="bg-fitcore-green text-black hover:bg-fitcore-green/80 shadow-[0_0_20px_rgba(57,255,20,0.3)]">
+                  <Check className="w-4 h-4 mr-2" /> 운동 완료 (종료)
+                </Button>
+              </div>
+              <button 
+                onClick={cancelWorkout}
+                className="text-[10px] text-gray-500 hover:text-red-400 font-bold flex items-center justify-center gap-1.5 py-3 transition-colors border-t border-white/5 mt-2"
+              >
+                <RotateCcw className="w-3 h-3" /> 이 운동 기록 전체 취소 및 삭제하기
+              </button>
             </div>
           </div>
         )}
