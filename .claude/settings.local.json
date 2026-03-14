@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Read(//c/Users/LG/.claude//**)",
-      "Bash(docker --version)"
+      "Bash(docker --version)",
+      "Read(//mnt/c/**)",
+      "Bash(cmd.exe /c \"dir C:\\\\Users\")",
+      "Bash(cmd.exe /c \"dir C:\\\\Users /b\")",
+      "Bash(cmd.exe /c \"dir C:\\\\Users /b 2>&1\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''C:\\\\Users'' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''C:\\\\Users\\\\Kang Chul Ho'' -ErrorAction SilentlyContinue | Select-Object Name, Attributes\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''C:\\\\Users\\\\Kang Chul Ho\\\\OneDrive'' -ErrorAction SilentlyContinue | Select-Object Name | Head -20\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem ''C:\\\\Users\\\\Kang Chul Ho'' | Where-Object { $_FullName -notlike ''*OneDrive*'' } | Select-Object Name, Attributes | Format-Table -AutoSize\")",
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\backup_scan.ps1\")",
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\check_sizes.ps1\")",
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\Kang Chul Ho\\\\do_backup.ps1\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\LG\\.gemini\\antigravity\\scratch\\my-saas-project\\apps\\admin",

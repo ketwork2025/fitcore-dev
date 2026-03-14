@@ -15,7 +15,7 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { GoalOnboarding } from '@/components/dashboard/GoalOnboarding';
 import { AIAdvisor } from '@/components/dashboard/AIAdvisor';
 import { Button } from '@/components/ui/Button';
-import { Target } from 'lucide-react';
+import { Target, Shield } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
@@ -109,10 +109,13 @@ export default function UITestPage() {
                        setUser({ id: 'demo-admin', email: 'admin@fitcore.ai', role: 'admin' });
                     }
                  }}
-                 title="Toggle Admin Mode"
-              >
-                 <div className={`w-2 h-2 rounded-full animate-pulse ${user?.role === 'admin' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-fitcore-green shadow-[0_0_8px_#39ff14]'}`} />
-              </Button>
+                  title="Toggle Admin Mode"
+               >
+                  <div className="relative">
+                    <Shield className={`w-4 h-4 transition-colors ${user?.role === 'admin' ? 'text-red-500' : 'text-fitcore-green'}`} />
+                    <div className={`absolute -top-1 -right-1 w-2 h-2 rounded-full animate-pulse ${user?.role === 'admin' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-fitcore-green shadow-[0_0_8px_#39ff14]'}`} />
+                  </div>
+               </Button>
               
               {!user && !isGuest && (
                 <div className="flex items-center">
@@ -126,7 +129,7 @@ export default function UITestPage() {
             {(user || isGuest) && (
               <Button
                 variant="ghost"
-                className="h-10 w-10 p-0 rounded-2xl bg-white/5 border border-white/5 hover:bg-fitcore-green/20 hover:text-fitcore-green transition-all"
+                className="h-10 w-10 p-0 rounded-2xl bg-white/5 border border-white/5 text-fitcore-green hover:bg-fitcore-green/20 transition-all flex items-center justify-center"
                 onClick={() => useAppStore.getState().setShowGoalSettings(true)}
                 title="나의 목표 수정"
               >
