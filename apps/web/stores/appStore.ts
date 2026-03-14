@@ -8,14 +8,18 @@ interface UserProfile {
   goal?: 'diet' | 'muscle';
 }
 
+export type UserGoal = 'diet' | 'health' | 'muscle';
+
 interface AppState {
   user: UserProfile | null;
   isGuest: boolean;
   isLoading: boolean;
+  userGoal: UserGoal | null;
   activeWorkoutId: string | null;
   setUser: (user: UserProfile | null) => void;
   setGuest: (isGuest: boolean) => void;
   setLoading: (loading: boolean) => void;
+  setUserGoal: (goal: UserGoal | null) => void;
   setActiveWorkoutId: (id: string | null) => void;
   logout: () => void;
 }
@@ -24,10 +28,12 @@ export const useAppStore = create<AppState>((set) => ({
   user: null,
   isGuest: false,
   isLoading: true,
+  userGoal: null,
   activeWorkoutId: null,
-  setUser: (user) => set({ user, isGuest: false }), // Reset guest if real user logs in
-  setGuest: (isGuest) => set({ isGuest, user: null }), // Clear user if guest logs in
+  setUser: (user) => set({ user, isGuest: false }),
+  setGuest: (isGuest) => set({ isGuest, user: null }),
   setLoading: (loading) => set({ isLoading: loading }),
+  setUserGoal: (goal) => set({ userGoal: goal }),
   setActiveWorkoutId: (id) => set({ activeWorkoutId: id }),
-  logout: () => set({ user: null, isGuest: false }),
+  logout: () => set({ user: null, isGuest: false, userGoal: null }),
 }));

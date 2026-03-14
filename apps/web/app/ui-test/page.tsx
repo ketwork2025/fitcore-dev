@@ -12,6 +12,8 @@ import { Body3D } from '@/components/dashboard/Body3D';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { GoalOnboarding } from '@/components/dashboard/GoalOnboarding';
+import { AIAdvisor } from '@/components/dashboard/AIAdvisor';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
@@ -79,6 +81,7 @@ export default function UITestPage() {
 
   return (
     <main className="min-h-screen bg-fitcore-navy text-white p-8">
+      <GoalOnboarding />
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="flex justify-between items-center bg-black/20 backdrop-blur-md p-4 rounded-3xl border border-white/5 sticky top-0 z-[100] shadow-2xl">
           <div className="flex items-center gap-4">
@@ -202,6 +205,8 @@ export default function UITestPage() {
                      <h2 className="text-xl font-black italic text-white uppercase tracking-wider">01. Service Integration (Phase S2/S4)</h2>
                      <p className="text-xs text-gray-500 font-bold uppercase">Manual Input & Logging System</p>
                   </header>
+
+                  <AIAdvisor />
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                      <div className="space-y-8">

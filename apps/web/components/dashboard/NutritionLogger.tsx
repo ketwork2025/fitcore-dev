@@ -26,6 +26,19 @@ export function NutritionLogger() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
+  
+  const userGoal = useAppStore((state) => state.userGoal);
+
+  const getNutritionTargets = () => {
+    switch (userGoal) {
+      case 'diet': return { cal: '1800-2000', pro: '120g+', desc: '저탄수 고단백 추천' };
+      case 'muscle': return { cal: '2500-3000', pro: '160g+', desc: '벌크업 탄수화물 증량' };
+      case 'health': return { cal: '2200-2400', pro: '100g+', desc: '영양 균형 집중' };
+      default: return null;
+    }
+  };
+
+  const targets = getNutritionTargets();
 
   const handleAIAnalysis = (data: any) => {
     setFoodName(data.name);
@@ -200,6 +213,20 @@ export function NutritionLogger() {
           </div>
         </form>
         
+        {targets && (
+          <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-fitcore-navyLight to-transparent border border-white/5 flex items-center justify-between">
+            <div>
+              <p className="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1">Target Guide ({t(`nutrition.goal_${userGoal}` as any) || userGoal})</p>
+              <p className="text-xs text-gray-300 font-bold">{targets.desc}</p>
+            </div>
+            <div className="text-right">
+              <span className="text-sm font-black text-fitcore-green">{targets.cal} kcal</span>
+              <span className="mx-2 text-gray-700">|</span>
+              <span className="text-sm font-black text-blue-400">Protein {targets.pro}</span>
+            </div>
+          </div>
+        )}
+
         <div className="mt-4 p-3 bg-fitcore-green/10 border border-fitcore-green/20 rounded-xl flex gap-3 items-start">
           <Info className="w-5 h-5 text-fitcore-green mt-0.5" />
           <p className="text-xs text-gray-300 leading-relaxed">
